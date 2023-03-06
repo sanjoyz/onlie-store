@@ -3,6 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User, Basket } = require('../models/models');
 
+const generateJwt = (id, email, role) => {
+  return jwt.sign(
+    {id, email, role},
+     process.env.SECRET_KEY,
+     {expiresIn: '24h'}
+  );
+}
+
+
 class UserController {
   async registration (req, res, next) {
     const { email, password, role } = req.body;
@@ -15,20 +24,28 @@ class UserController {
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const user = await User.create({ email, role, password: hashPassword });
-    const basket = await User.create({ userId: user.id });
-    const jwt = jwt.sign({id: user.id, email, role});
+    const basket = await Basket.create({ UserId: user.id });    
+    const token = generateJwt(user.id, email, role)
+    return res.json({token}); 
   }
 
-  async login (req, res) {
-
-  }
-
-  async check (req, res, next) {
-    const { id } = req.query;
-    if (!id) {
-      return next(ApiError.badRequest('User ID not defined in request'));
+  async login (req, res, next) {
+    const {email, password} = req.body;
+    const user = await User.findOne({where: {email}});
+    if (!user) {
+      return next(ApiError.internalError({message: 'User with such email not found'}));
     }
-    res.json({ id });
+    let isPasswordCorrect = bcrypt.compareSync(password, user.password);
+    if (!isPasswordCorrect) {
+      return next(ApiError.internalError({message: 'Password is incorrect'}));
+    }
+    const token = generateJwt(user.id, user.email, user.role);
+    return res.json(token);
+  }
+
+  async check (req, res, next) {    
+    const token = generateJwt(req.user.id, req.user.email, req.user.role);
+    return res.json(token);
   }
 }
 
