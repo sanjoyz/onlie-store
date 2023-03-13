@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Context } from '../index';
-import { authRoutes, publicRoutes } from '../routes';
-import { SHOP_ROUTE } from '../utils/const';
+import React, { useContext } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { Context } from '../index'
+import { authRoutes, publicRoutes } from '../routes'
+import { SHOP_ROUTE } from '../utils/const'
 
 const AppRouter = () => {
-  const { user } = useContext(Context);
+  const { user } = useContext(Context)
 
   return (
     <Routes>
@@ -17,7 +17,7 @@ const AppRouter = () => {
       )}
       <Route path='*' element={<Navigate to={SHOP_ROUTE} />} />
     </Routes>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter
