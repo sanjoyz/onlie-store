@@ -86,6 +86,28 @@ export default class DeviceStore {
         updatedAt: '2023-03-03 12:55:44.839+03',
         TypeId: 2,
         BrandId: 2
+      },
+      {
+        id: 13,
+        name: 'ZenPhone',
+        rating: '0',
+        price: 100000,
+        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
+        createdAt: '2023-03-03 12:55:44.839+03',
+        updatedAt: '2023-03-03 12:55:44.839+03',
+        TypeId: 2,
+        BrandId: 2
+      },
+      {
+        id: 14,
+        name: 'ZenPhone',
+        rating: '0',
+        price: 100000,
+        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
+        createdAt: '2023-03-03 12:55:44.839+03',
+        updatedAt: '2023-03-03 12:55:44.839+03',
+        TypeId: 2,
+        BrandId: 2
       }
     ]
     this._selectedType = {}
