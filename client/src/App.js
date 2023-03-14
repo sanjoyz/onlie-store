@@ -8,7 +8,7 @@ import { check } from './http/userApi'
 import { Spinner } from 'react-bootstrap'
 
 const App = observer(() => {
-  const {user} = useContext(Context)
+  const { user } = useContext(Context)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -19,9 +19,9 @@ const App = observer(() => {
   }, [])
 
   if (loading) {
-    return <Spinner animation='grow'/>
+    return <Spinner style={{ top: '50%', right: '50%', position: 'absolute', textAlign: 'center' }} animation='grow' />
   }
-  
+
   return (
     <BrowserRouter>
       <NavBar />

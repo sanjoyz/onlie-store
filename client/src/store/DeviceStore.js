@@ -2,116 +2,14 @@ import { makeAutoObservable } from 'mobx'
 
 export default class DeviceStore {
   constructor () {
-    this._types = [
-      {
-        id: 1,
-        name: 'Fridges'
-      },
-      {
-        id: 2,
-        name: 'Smartphones'
-      },
-      {
-        id: 3,
-        name: 'Notebooks'
-      },
-      {
-        id: 4,
-        name: 'TV'
-      }
-    ]
-    this._brands = [
-      {
-        id: 1,
-        name: 'Samsung'
-      },
-      {
-
-        id: 2,
-        name: 'Apple'
-      },
-      {
-
-        id: 3,
-        name: 'Lenovo'
-      },
-      {
-
-        id: 4,
-        name: 'Asus'
-      }
-
-    ]
-    this._devices = [
-      {
-        id: 9,
-        name: '10 PRO 128GB',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 2,
-        BrandId: 2
-      },
-      {
-        id: 10,
-        name: 'STT',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 1,
-        BrandId: 1
-      },
-      {
-        id: 11,
-        name: 'SFrostTT',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 1,
-        BrandId: 1
-      },
-      {
-        id: 12,
-        name: 'ZenPhone',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 2,
-        BrandId: 2
-      },
-      {
-        id: 13,
-        name: 'ZenPhone',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 2,
-        BrandId: 2
-      },
-      {
-        id: 14,
-        name: 'ZenPhone',
-        rating: '0',
-        price: 100000,
-        img: '6b275294-0196-41ec-98e7-806344d64c9f.jpg',
-        createdAt: '2023-03-03 12:55:44.839+03',
-        updatedAt: '2023-03-03 12:55:44.839+03',
-        TypeId: 2,
-        BrandId: 2
-      }
-    ]
+    this._types = []
+    this._brands = []
+    this._devices = []
     this._selectedType = {}
     this._selectedBrand = {}
+    this._page = 1
+    this._totalCount = 0
+    this._limit = 5
     makeAutoObservable(this)
   }
 
@@ -128,11 +26,22 @@ export default class DeviceStore {
   }
 
   setSelectedType (type) {
+    this.setPage(1)
     this._selectedType = type
   }
 
   setSelectedBrand (brand) {
+    this.setPage(1)
     this._selectedBrand = brand
+  }
+  setPage(page) {
+    this._page = page
+  }
+  setTotalCount(totalCount) {
+    this._totalCount = totalCount
+  }
+  setLimit(limit) {
+    this._limit = limit
   }
 
   get types () {
@@ -153,5 +62,14 @@ export default class DeviceStore {
 
   get selectedBrand () {
     return this._selectedBrand
+  }
+  get totalCount () {
+    return this._totalCount
+  }
+  get page () {
+    return this._page
+  }
+  get limit () {
+    return this._limit
   }
 }

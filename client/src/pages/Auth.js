@@ -24,7 +24,7 @@ const Auth = observer(() => {
       }
       user.setUser(user)
       user.setIsAuth(true)
-      navigate(SHOP_ROUTE);
+      navigate(SHOP_ROUTE)
     } catch (error) {
       console.log(error)
     }
